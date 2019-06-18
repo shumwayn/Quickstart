@@ -1,0 +1,15 @@
+---
+title: "Graphics with ggplot2"
+author: "Nicki Shumway"
+date: "6/19/2019"
+output: html_document
+---
+#Learning ggplot2
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(gglplot2)
+
+knitr::opts_chunk$set(echo = TRUE)
+```
+
