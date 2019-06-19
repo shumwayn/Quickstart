@@ -54,6 +54,25 @@ summary(benthic)
 
 skimr::skim(benthic)
 
+unique(benthic$date)
+unique(benthic$id_name)
+
+ggplot(benthic, aes(date, fill = id_name)) + 
+  geom_bar()
+
+```
+
+#Buoy Data
+```{r buoy data}
+
+#import buoy data
+
+#this doesn't work because not comma delineated
+buoy <- readr::read_csv(buoy_url)
+head(buoy)
+
+buoy <- read_table2(buoy_url)
+buoy
 
 
 
