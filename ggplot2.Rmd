@@ -45,3 +45,16 @@ ggplot(data=ohi_data, aes (x=HDI)) +
 
 ```
 
+Multiple geoms exploration
+
+```{r}
+
+ohi_summary <- read_csv("https://raw.githubusercontent.com/OHI-Science/data-science-training/master/data/OHI_scores_georegion_summary.csv")
+
+ggplot(data = ohi_summary, aes(x=georegions, y=OHI_score_average)) +
+  geom_bar(stat = "identity") + 
+  geom_jitter(data = ohi_data, aes(x=georegion_one, y = OHI_score))
+
+```
+
+
