@@ -126,6 +126,14 @@ buoy$date
 head(benthic)
 head(buoy)
 
+#left-join benthic date
+bb_join <- benthic %>% 
+  left_join(buoy, by = "date")
+
+bb_join %>% 
+  select(id_name, x, y, date, hh_hr, mm_mn, WTMP_degC) %>% 
+  head()
+
 
 ```
 
