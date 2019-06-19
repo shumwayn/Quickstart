@@ -57,4 +57,93 @@ ggplot(data = ohi_summary, aes(x=georegions, y=OHI_score_average)) +
 
 ```
 
+Adding more nuanced control over ggplot #putting geom before aes
+```{r}
+
+ggplot(data = ohi_data) +
+  geom_point(aes(y = OHI_score, x = HDI, color=georegion_one)) 
+
+```
+
+Changing point size based on population, color based on HDI
+```{r}
+
+ggplot(data = ohi_data, aes(x = OHI_score, y = HDI, size = coastal_pop, color = HDI)) + 
+  geom_point()
+```
+
+Adding a third variable (discrete)
+
+```{r}
+
+ggplot(data = ohi_data, aes(x = OHI_score, y = HDI, color = georegion_one)) + 
+  geom_point()
+
+```
+
+
+Adding text instead of points
+```{r}
+ggplot(data = ohi_data, aes(x = OHI_score, y = HDI, label=country)) + 
+  geom_point(aes(x = OHI_score, y = HDI)) +
+  geom_text()
+```
+
+
+Themes
+```{r}
+
+ggplot(data = ohi_data, aes(x = OHI_score, y = HDI)) + 
+  geom_point() +
+  theme_bw()
+
+```
+
+
+
+Creating your own themes
+```{r}
+
+
+ggplot(data = ohi_data, aes(x = OHI_score, y = HDI)) + 
+  geom_point() +
+  theme_bw()
+
+source('https://raw.githubusercontent.com/OHI-Science/ohiprep/master/src/R/scatterTheme.txt')       
+
+ggplot(data = ohi_data, aes(x = OHI_score, y = HDI)) + 
+  geom_point() + 
+  scatterTheme
+
+```
+
+Change labels
+```{r}
+
+ggplot(data = ohi_data, aes(y = OHI_score, x = HDI, color = georegion_one)) + 
+  geom_point() +
+  labs(y="OHI score, 2017",
+       x = "Human Development Index",
+       title = "Human development is good for oceans",
+       color = "Georegions")
+
+
+
+```
+
+
+
+Changing colors #use an established color palatte - R color Brewer
+
+```{r}
+
+install.packages("RColorBrewer")
+library(RColorBrewer)
+
+display.brewer.all()
+
+my_palette <- brewer.pal(n=9, "YlOrRd") #will choose 9 colors from the YLOrRd palette
+
+
+```
 
