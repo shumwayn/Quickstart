@@ -1,0 +1,61 @@
+---
+title: "Tidycoral"
+author: "Nicki Shumway"
+date: "6/19/2019"
+output: html_document
+---
+
+#Read in data
+```{r setup, warning=FALSE, message=FALSE}
+
+#install library
+library(tidyverse) #install.packages("tidyverse")
+library(janitor) #install.packages("janitor")
+library(skimr) #install.packages("skimr")
+library(stringr) #install.packages("stringr")
+
+
+##data filepaths
+## benthic data
+benthic_url <- 'https://www.nodc.noaa.gov/archive/arc0054/0104255/1.1/data/0-data/cd08/100308OaAla03m.CSV'
+
+## buoy data
+buoy_url <- 'http://www.ndbc.noaa.gov/view_text_file.php?filename=mokh1h2010.txt.gz&dir=data/historical/stdmet/'
+
+```
+
+#Read in benthic data
+```{r benthic raw}
+
+benthic_raw <- read_csv(benthic_url)
+head(benthic_raw)
+```
+
+#Wrangle
+```{r wrangle}
+benthic <- benthic_raw %>%
+  janitor::clean_names()
+  
+#explore data
+head(benthic)
+names(benthic)
+
+#select our columns
+benthic <- benthic %>%
+  select(id_name, point, x, y, id_date) %>% 
+  mutate(date = stringr::str_remove_all(id_date, "#"))
+
+```
+
+#Explore 
+```{r explore}
+
+summary(benthic)
+
+skimr::skim(benthic)
+
+
+
+
+```
+

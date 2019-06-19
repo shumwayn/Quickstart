@@ -17,6 +17,11 @@ Load data
 
 gapminder <- read_csv("https://raw.githubusercontent.com/OHI-Science/data-science-training/master/data/gapminder.csv")
 
+ggplot(data=gapminder, aes(y=lifeExp, x= gdpPercap)) +
+  geom_point() +
+  geom_hline (yintercept = median(gapminder$lifeExp), color = "red") +
+  geom_vline (xintercept = median(gapminder$gdpPercap), color = "red")
+
 # Exploring the data in R Studio - keep the data RAW!
 head(gapminder)
 tail(gapminder)
@@ -146,6 +151,5 @@ gapminder %>%
   group_by (continent) %>%
   mutate (max_gdp = max(gdp))
   
-
 ```
 
