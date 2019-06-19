@@ -47,3 +47,43 @@ mean (Brazil_life_exp$lifeExp)
 
 ```
 
+Learning the 'select()' function
+```{r}
+
+select(gapminder, year, country, lifeExp) ## to specifically select the columns you want
+select(gapminder, -continent, -gdpPercap) ##the - indicates dropping a data column
+
+```
+
+Using 'filter' and 'select()' together
+```{r}
+gap_cambodia <- filter(gapminder, country == "Cambodia")
+gap_cambodia2 <- select (gap_cambodia, -continent, -lifeExp)
+```
+
+Using the pipe ' %>% ' function (shortcut:CMD + Shift + M) %>% = and then
+```{r}
+gapminder %>% head()
+
+gap_cambodia <- filter(gapminder, country == "Cambodia") %>% 
+ select (-continent, -lifeExp)
+
+## making the above even cleaner
+gap_cambodia <- gapminder %>% 
+  filter(country == "Cambodia") %>% #and then
+ select (-continent, -lifeExp)
+
+gap_mexico <- gapminder %>% 
+  filter(country == "Mexico") %>% #and then
+ select (-continent, -lifeExp)
+
+```
+
+Learning 'mutate()' which adds a new columb
+```{r}
+
+gapminder %>% 
+  mutate(gdp = pop*gdpPercap)
+
+```
+
