@@ -68,12 +68,63 @@ ggplot(benthic, aes(date, fill = id_name)) +
 #import buoy data
 
 #this doesn't work because not comma delineated
-buoy <- readr::read_csv(buoy_url)
+buoy_raw <- readr::read_csv(buoy_url)
+head(buoy_raw)
+
+buoy_raw <- read_table2(buoy_url)
+
+
+```
+
+#Wrangle 
+
+```{r buoy data wrangle}
+
+buoy <- buoy_raw
+
+#overwrite column names
+names(buoy) <- str_c(
+  names(buoy),
+  buoy %>% filter (`#YY` == "#yr"), #`` is for variable name
+  sep = "_")
+names(buoy)
+
+#clean up the slashes, get rid of # and /
+names(buoy) <- str_replace_all(names(buoy), "#", "")
+names(buoy) <- str_replace_all(names(buoy), "/", "")
+names(buoy)
+
 head(buoy)
 
-buoy <- read_table2(buoy_url)
-buoy
+#delete now redundant row
 
+buoy <- buoy %>% 
+  filter(`YY_yr` != "#yr")
+head(buoy)
+
+```
+
+#Explore!
+```{r}
+ggplot(buoy, aes(WTMP_degC)) +
+  geom_bar()
+
+```
+
+#Join datasets
+```{r}
+head(benthic)
+head(buoy)
+
+#unite buoy dates
+buoy <-buoy %>% 
+  unite(date, c(YY_yr, MM_mo, DD_dy), sep = "-") #from tidyr package
+
+head(buoy)
+buoy$date
+
+head(benthic)
+head(buoy)
 
 
 ```
