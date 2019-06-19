@@ -1,0 +1,49 @@
+---
+title: "Data wrangling"
+author: "Nicki Shumway"
+date: "6/19/2019"
+output: html_document
+---
+
+Loading the tidyverse
+```{r}
+library(tidyverse)
+```
+
+Load data
+```{r}
+
+#load the gapminder dataset
+
+gapminder <- read_csv("https://raw.githubusercontent.com/OHI-Science/data-science-training/master/data/gapminder.csv")
+
+# Exploring the data in R Studio - keep the data RAW!
+head(gapminder)
+tail(gapminder)
+str(gapminder) #shows you the structure
+names(gapminder) # gives you the column name
+
+```
+
+Look at individual variables in dataframe
+```{r}
+
+##Specify life expectancy
+gapminder$lifeExp
+
+```
+
+Learning the filter function 'filter()'
+```{r}
+filter(gapminder, lifeExp < 35)
+
+#just look at mexico
+filter(gapminder, country == "Mexico", year == 2002)
+
+#average life expectancy in Brazil between 1987 and 2007
+Brazil_life_exp <-filter(gapminder, country == "Brazil", year > 1986 & year <=2007)
+Brazil_life_exp
+mean (Brazil_life_exp$lifeExp)
+
+```
+
