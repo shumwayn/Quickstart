@@ -95,3 +95,57 @@ gapminder %>%
 
 ```
 
+
+Learning the 'group_by()' function
+```{r}
+
+gapminder %>% 
+  filter(year == 2002) %>% 
+  group_by(continent) %>% 
+  mutate(cont_pop = sum(pop))
+
+
+```
+
+Add in 'summarize()'
+```{r}
+
+gapminder %>% 
+  filter(year == 2002) %>% 
+  group_by(continent) %>% 
+  mutate(cont_pop = sum(pop)) %>% 
+  summarize(cont_pop = sum(pop))
+
+```
+
+Add in year for each continent
+```{r}
+gapminder %>% 
+  group_by(continent, year) %>% 
+  summarize(cont_pop = sum(pop)) %>% 
+  ungroup () ## ungroup - get in the habit of ungrouping, will stay grouped for analysis
+  
+```
+
+'arrange()' arranges columns 
+
+```{r}
+
+gapminder %>% 
+  group_by(continent, year) %>% 
+  summarize(cont_pop = sum(pop)) %>%
+  arrange (year) %>% 
+  ungroup()
+```
+
+What is the max GDP per continent across all years
+```{r}
+
+gapminder %>% 
+  mutate(gdp = pop*gdpPercap) %>% 
+  group_by (continent) %>%
+  mutate (max_gdp = max(gdp))
+  
+
+```
+
