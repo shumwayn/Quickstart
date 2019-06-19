@@ -85,5 +85,13 @@ Learning 'mutate()' which adds a new columb
 gapminder %>% 
   mutate(gdp = pop*gdpPercap)
 
+##Calculate the population in thousands for all Asian countries in the year 2007 and add it as a new column
+
+gapminder %>% 
+  filter(continent == "Asia",
+         year =="2007") %>% 
+  mutate (pop_thousands = pop/1000)
+  
+
 ```
 
