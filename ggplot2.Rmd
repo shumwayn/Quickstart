@@ -142,8 +142,20 @@ library(RColorBrewer)
 
 display.brewer.all()
 
-my_palette <- brewer.pal(n=9, "YlOrRd") #will choose 9 colors from the YLOrRd palette
+my_palette <- brewer.pal(n=9, "YlOrRd")
 
+ggplot(data = ohi_data, aes(x=OHI_score, 
+                            y=OHI_trend,
+                            color = HDI)) +
+  geom_point(size=3) +
+  scale_color_gradientn(colors = my_palette)
+
+
+ggplot(data = ohi_data, aes(x=OHI_score, 
+                            y=HDI,
+                            color = georegion_one)) +
+  geom_point(size = 3) +
+  scale_color_manual(values = my_palette)
 
 ```
 
